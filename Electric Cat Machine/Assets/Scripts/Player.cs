@@ -13,6 +13,23 @@ public class Player : MonoBehaviour
     private bool attack;
     private bool facingRight;
 
+    [SerializeField]
+    private Transform[] groundPoints;
+
+
+    // Define how close the player has to be to a platform to be considered on the ground
+    [SerializeField]
+    private float groundRadius;
+
+    [SerializeField]
+    private LayerMask whatIsGround;
+    private bool isGrounded;
+
+    private bool jump;
+
+    [SerializeField]
+    private float jumpForce;
+
     // Use this to "freeze" the player, i.e. can't move when attacking
     private bool canMove;
 
@@ -28,6 +45,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        isGrounded = IsGrounded();
         HandleInput();
     }
 
@@ -49,7 +67,13 @@ public class Player : MonoBehaviour
         // Proceed with normal input processing/movement
         if (canMove)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+            {
+                isGrounded = false;
+                myRigidBody.AddForce((new Vector2(0, jumpForce)));
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 attack = true;
                 canMove = false;
@@ -91,5 +115,27 @@ public class Player : MonoBehaviour
     {
         attack = false;
         canMove = true;
+    }
+
+    // Determine if the player is touching the ground
+    private bool IsGrounded()
+    {
+        if (myRigidBody.velocity.y <= 0)
+        {
+            foreach (Transform point in groundPoints)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
+
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    // If the groundPoint is colliding with anything except the player (GameObject)
+                    if (colliders[i].gameObject != gameObject)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
