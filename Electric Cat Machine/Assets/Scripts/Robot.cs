@@ -14,13 +14,13 @@ public class Robot : MonoBehaviour
     [SerializeField]
     private float jumpForce;
     private bool airControl;
+    private float speed;
 
     // Player state
     private bool facingRight;
     private bool grounded;
     private bool attack;
     private bool jump;
-    private bool jumpAttack;
     private bool slide;
 
     [SerializeField]
@@ -41,6 +41,7 @@ public class Robot : MonoBehaviour
         facingRight = true;
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        grounded = true;
     }
 
     private void Update()
@@ -72,47 +73,15 @@ public class Robot : MonoBehaviour
         ResetActions();
     }
 
-    //
+    // ##################################################
     // Player Actions
-    //
-
+    // ##################################################
     private void HandleMovement(float horizontal)
     {
-
-
-//        if (myRigidbody.velocity.y < 0) //We need to land if the player is falling
-//        {
-//            myAnimator.SetBool("Land", true); //Trigers the landing animation
-//        }
-////        if (!myAnimator.GetBool("Slide") && grounded && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || airControl)  //chesk if we should move the player
-////        {
-////            myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y); //Moves the player
-////        }
-//        if (grounded && jump) //if we should jump
-//        {
-//            // Add a vertical force to the player.
-//            grounded = false;
-//
-//            //Makes the player jump
-//            myRigidbody.AddForce(new Vector2(0f, 400));
-//        }
-//        if (grounded && slide && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide")) //If we need to slide
-//        {
-//            myAnimator.SetBool("Slide", true); //Triggers the slide animation
-//        }
-//        else if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide")) //If we are sliding
-//        {
-//            myAnimator.SetBool("Slide", false); //Indicate that we are done sliding
-//        }
-
-        //Keeps the speed in the animator up to date
-//        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
-
-//        if (transform.position.y <= -10) //If we fall down then respawn the player
-//        {
-//            transform.position = startPos;
-//            myRigidbody.velocity = Vector2.zero;
-//        }
+        if (grounded && jump) //if we should jump
+        {
+            myRigidbody.AddForce(new Vector2(0f, 400));
+        }
     }
 
 
@@ -133,11 +102,17 @@ public class Robot : MonoBehaviour
 //            myRigidbody.velocity = Vector2.zero;
 //        }
 
-        if (Input.GetKeyDown(KeyCode.W))
+
+        // This is a quick hack to test loading another scene
+//        if (Input.GetKeyDown(KeyCode.Z))
+//        {
+//            Application.LoadLevel("MainScene");
+//        }
+//
+        if (Input.GetKeyDown(KeyCode.W) && grounded)
         {
-//            grounded = false;
-//            jump = true;
-            myRigidbody.AddForce((new Vector2(0, jumpForce)));
+            grounded = false;
+            jump = true;
         }
 
 //        if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -148,13 +123,15 @@ public class Robot : MonoBehaviour
 //        }
 //        else
 //        {
-        float horizontal = Input.GetAxis("Horizontal");
-        myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
+        if (grounded)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
 
-        // Set speed inside animator for controlling run animation
-        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
-
-        Flip(horizontal);
+            // Set speed inside animator for controlling run animation
+            //myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+            Flip(horizontal);
+        }
 //        }
     }
 
@@ -175,8 +152,10 @@ public class Robot : MonoBehaviour
     private void ResetActions()
     {
         attack = false;
-        jump = false;
-        jumpAttack = false;
+        if (IsGrounded())
+        {
+            jump = false;   
+        }
         slide = false;
 
     }
