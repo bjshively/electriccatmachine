@@ -667,7 +667,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -711,6 +711,7 @@ MonoBehaviour:
   xMin: -5000
   yMax: 5000
   yMin: -5000
+  playerObject: Robot
 --- !u!1 &1167766130
 GameObject:
   m_ObjectHideFlags: 0
