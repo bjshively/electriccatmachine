@@ -24,14 +24,9 @@ public class Robot : MonoBehaviour
     private bool slide;
 
     [SerializeField]
-    private Transform[] groundPoints;
-
-    // Define how close the player has to be to a platform to be considered on the ground
-    [SerializeField]
-    private float groundRadius;
-
-    [SerializeField]
     private LayerMask whatIsGround;
+
+    private BoxCollider2D jumpCollider;
 
     // ##################################################
     // Setup and update functions
@@ -41,6 +36,7 @@ public class Robot : MonoBehaviour
         facingRight = true;
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        jumpCollider = this.transform.Find("groundPoint").GetComponent<BoxCollider2D>();
         grounded = true;
     }
 
@@ -56,6 +52,15 @@ public class Robot : MonoBehaviour
 
         //Checks if the player is grounded
         grounded = IsGrounded();
+
+        if (!grounded)
+        {
+            myAnimator.SetBool("jump", true);
+        }
+        else
+        {
+            myAnimator.SetBool("jump", false);
+        }
 
         //Flips the player in the correct direction
         Flip(horizontal);
@@ -169,22 +174,14 @@ public class Robot : MonoBehaviour
     // Determine if the player is touching the ground
     private bool IsGrounded()
     {
-        if (myRigidbody.velocity.y <= 0)
+//        return jumpCollider.IsTouchingLayers(whatIsGround);
+        if (Physics2D.Raycast(jumpCollider.transform.position, Vector2.down, 0.2f, whatIsGround.value))
         {
-            foreach (Transform point in groundPoints)
-            {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
-
-                for (int i = 0; i < colliders.Length; i++)
-                {
-                    // If the groundPoint is colliding with anything except the player (GameObject)
-                    if (colliders[i].gameObject != gameObject)
-                    {
-                        return true;
-                    }
-                }
-            }
+            return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 }
