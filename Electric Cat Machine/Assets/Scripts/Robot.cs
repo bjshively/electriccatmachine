@@ -129,7 +129,7 @@ public class Robot : MonoBehaviour
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
 
             // Set speed inside animator for controlling run animation
-            //myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+            myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
             Flip(horizontal);
         }
 //        }
