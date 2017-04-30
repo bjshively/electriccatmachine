@@ -113,6 +113,7 @@ public class Robot : MonoBehaviour
         {
             grounded = false;
             jump = true;
+            myAnimator.SetBool("jump", true);
         }
 
 //        if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -125,11 +126,12 @@ public class Robot : MonoBehaviour
 //        {
         if (grounded)
         {
+            myAnimator.SetBool("jump", false);
             float horizontal = Input.GetAxis("Horizontal");
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
 
             // Set speed inside animator for controlling run animation
-            myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+            myAnimator.SetFloat("speed", Mathf.Abs(horizontal * movementSpeed));
             Flip(horizontal);
         }
 //        }

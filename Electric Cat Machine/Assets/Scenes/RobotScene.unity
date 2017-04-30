@@ -221,6 +221,11 @@ Prefab:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 61933686536719270, guid: 445fb22fd94b84797b4819e200529bdd,
+        type: 2}
+      propertyPath: m_EdgeRadius
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 445fb22fd94b84797b4819e200529bdd, type: 2}
   m_IsPrefabParent: 0
