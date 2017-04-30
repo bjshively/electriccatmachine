@@ -13,7 +13,7 @@ public class Robot : MonoBehaviour
     private float movementSpeed;
     [SerializeField]
     private float jumpForce;
-    private bool airControl;
+    private bool airControl = true;
     private float speed;
 
     // Player state
@@ -74,8 +74,8 @@ public class Robot : MonoBehaviour
         //Handles the animator layers
         //HandleLayers();
 
-		Debug.Log ("grounded: " + grounded);
-		Debug.Log ("jump: " + jump);
+        Debug.Log("grounded: " + grounded);
+        Debug.Log("jump: " + jump);
 
 
         //Resets all actions
@@ -133,9 +133,9 @@ public class Robot : MonoBehaviour
 //        }
 //        else
 //        {
-        if (grounded)
+        if (grounded || airControl)
         {
-            myAnimator.SetBool("jump", false);
+//            myAnimator.SetBool("jump", false);
             float horizontal = Input.GetAxis("Horizontal");
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
 
