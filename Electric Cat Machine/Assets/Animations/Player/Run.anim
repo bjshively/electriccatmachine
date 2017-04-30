@@ -49,9 +49,9 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: {x: 0, y: 0, z: -38.356003}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: -72.888}
+        inSlope: {x: 0, y: 0, z: -196.376}
+        outSlope: {x: 0, y: 0, z: -196.376}
         tangentMode: 0
       - serializedVersion: 2
         time: 0.25
@@ -73,9 +73,9 @@ AnimationClip:
         tangentMode: 0
       - serializedVersion: 2
         time: 1
-        value: {x: 0, y: 0, z: -38.356003}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: -72.888}
+        inSlope: {x: 0, y: 0, z: -233.688}
+        outSlope: {x: 0, y: 0, z: -233.688}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -775,10 +775,10 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -38.356003
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        value: -72.888
+        inSlope: -196.376
+        outSlope: -196.376
+        tangentMode: 34
       - serializedVersion: 2
         time: 0.25
         value: -121.982
@@ -799,10 +799,10 @@ AnimationClip:
         tangentMode: 136
       - serializedVersion: 2
         time: 1
-        value: -38.356003
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        value: -72.888
+        inSlope: -233.688
+        outSlope: -233.688
+        tangentMode: 34
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -2090,7 +2090,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: FrontLeg/FrontFoot
+    path: BackLeg/BackFoot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2100,7 +2100,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: FrontLeg/FrontFoot
+    path: BackLeg/BackFoot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2110,7 +2110,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: FrontLeg/FrontFoot
+    path: BackLeg/BackFoot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2360,7 +2360,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: BackLeg/BackFoot
+    path: FrontLeg/FrontFoot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2370,7 +2370,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: BackLeg/BackFoot
+    path: FrontLeg/FrontFoot
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -2380,7 +2380,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: BackLeg/BackFoot
+    path: FrontLeg/FrontFoot
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

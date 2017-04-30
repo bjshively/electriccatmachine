@@ -69,6 +69,10 @@ public class Robot : MonoBehaviour
         //Handles the animator layers
         //HandleLayers();
 
+		Debug.Log ("grounded: " + grounded);
+		Debug.Log ("jump: " + jump);
+
+
         //Resets all actions
         ResetActions();
     }
