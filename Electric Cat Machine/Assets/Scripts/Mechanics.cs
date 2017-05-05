@@ -5,10 +5,14 @@ using UnityEngine;
 public class Mechanics : MonoBehaviour
 {
     private LineRenderer lineRenderer;
+    private Rigidbody2D rigidBody;
+
     private Vector3 laserPoint;
     private Vector3 mouseWorld;
     private int facing;
+
     private GameObject babyNinja;
+    private GameObject laserPointer;
 
     // Mechanics
     public bool canThrowCat;
@@ -25,8 +29,12 @@ public class Mechanics : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.sortingLayerName = "Laser";
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+
+        rigidBody = GetComponent<Rigidbody2D>();
+
+        laserPointer = GameObject.Find("LaserOrigin");
     }
-	
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -40,11 +48,23 @@ public class Mechanics : MonoBehaviour
             facing = -1;
         }
 
-        HandleControls();
+        float horizontal = Input.GetAxis("Horizontal");
+        HandleControls(horizontal);
     }
 
-    public void HandleControls()
+    public void HandleControls(float horizontal)
     {
+        if (horizontal > 0)
+        {
+            rigidBody.AddForce(Vector2.right);
+            facing = 1;
+        }
+        else if (horizontal < 0)
+        {
+            rigidBody.AddForce(Vector2.left);
+            facing = -1;
+        }
+
         // Throw a regular cat
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -64,7 +84,7 @@ public class Mechanics : MonoBehaviour
             if (isShiningLaser)
             {
                 lineRenderer.enabled = true;
-                lineRenderer.SetPositions(new Vector3[]{ this.transform.position, mouseWorld });
+                lineRenderer.SetPositions(new Vector3[]{ laserPointer.transform.position, mouseWorld });
             }
         }
 

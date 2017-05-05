@@ -19,6 +19,7 @@ public class LaserFollowingCat : Cat
         }
 
         // When mouse button is let off, deactive the cat
+        // Cat is killed immediately if it is airborn
         // This cat begins ignoring the mouse and runs off in the direction it is currently headed
         if (Input.GetMouseButtonUp(0))
         {
