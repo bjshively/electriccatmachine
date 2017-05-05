@@ -34,10 +34,4 @@ public class RunningCat : Cat
     {
         Destroy(gameObject, 3);
     }
-
-    void OnDestroy()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<Mechanics>().canThrow = true;
-    }
 }

@@ -204,7 +204,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 55594655}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff7d77db73483497a8a4817a6763e108, type: 3}
   m_Name: 
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 167995603}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,6 +285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b2831782c6a4882b1d4524ab4c7731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canThrowCat: 0
+  isShiningLaser: 0
 --- !u!120 &167995603
 LineRenderer:
   m_ObjectHideFlags: 0

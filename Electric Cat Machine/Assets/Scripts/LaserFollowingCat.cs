@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class LaserFollowingCat : Cat
 {
+    protected override void Start()
+    {
+        base.Start();
+        playerAttributes.isShiningLaser = true;
+    }
+
     protected override void Move()
     {
         // As long as the cat is active, it should look at the mouse pointer
@@ -43,8 +49,18 @@ public class LaserFollowingCat : Cat
 
     protected override void Kill()
     {
-        Destroy(gameObject, 5);
-        rigidBody.velocity = new Vector2(10, rigidBody.velocity.y);
-        alive = false;
+        if (alive)
+        {
+            Destroy(gameObject, 5);
+            rigidBody.velocity = new Vector2(10, rigidBody.velocity.y);
+            alive = false;
+        }
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        playerAttributes.isShiningLaser = false;
+
     }
 }

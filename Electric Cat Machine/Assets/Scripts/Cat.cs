@@ -8,6 +8,7 @@ public abstract class Cat : MonoBehaviour
     protected Vector3 mouseWorld;
     protected Rigidbody2D rigidBody;
     public LayerMask ground;
+    protected Mechanics playerAttributes;
 
     // Attributes
     public int facing;
@@ -16,6 +17,7 @@ public abstract class Cat : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        playerAttributes = GameObject.FindGameObjectWithTag("Player").GetComponent<Mechanics>();
         alive = true;
         rigidBody = GetComponent<Rigidbody2D>();
         Flip();
@@ -66,10 +68,18 @@ public abstract class Cat : MonoBehaviour
     // Immediately destroy the cat
     protected virtual void Kill()
     {
-        Destroy(gameObject);
+        if (alive)
+        {
+            alive = false;
+            Destroy(gameObject);
+        }
+    }
+
+    protected virtual void OnDestroy()
+    {
+        playerAttributes.canThrowCat = true;
     }
 
     // Each cat type implements its own Move logic
     protected abstract void Move();
-
 }
