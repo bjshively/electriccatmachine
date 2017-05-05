@@ -7,6 +7,8 @@ public class Laser : MonoBehaviour
     private LineRenderer lineRenderer;
     private Vector3 laserPoint;
     private Vector3 mouseWorld;
+
+    private GameObject babyNinja;
     //    private
     // Use this for initialization
     void Start()
@@ -20,6 +22,11 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetMouseButtonDown(0) && !babyNinja)
+        {
+            babyNinja = (GameObject)Instantiate(Resources.Load("BabyNinja"));
+            babyNinja.transform.position = this.transform.position;
+        }
         if (Input.GetMouseButton(0))
         {
             lineRenderer.enabled = true;
@@ -36,6 +43,7 @@ public class Laser : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
+            Destroy(babyNinja);
         }
     }
 
