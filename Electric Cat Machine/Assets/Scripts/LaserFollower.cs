@@ -6,6 +6,7 @@ public class LaserFollower : MonoBehaviour
 {
     private Vector3 mouseWorld;
     private Rigidbody2D rigidBody;
+    public LayerMask ground;
     // Use this for initialization
     void Start()
     {
@@ -16,6 +17,7 @@ public class LaserFollower : MonoBehaviour
     void FixedUpdate()
     {
         {
+            Debug.Log(IsGrounded());
             mouseWorld = Input.mousePosition;
             mouseWorld.z = 10.0f;
             mouseWorld = Camera.main.ScreenToWorldPoint(mouseWorld);
@@ -23,25 +25,36 @@ public class LaserFollower : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                if (mouseWorld.x > xpos)
+                if (IsGrounded())
                 {
-                    Vector3 scale = transform.localScale;
-                    scale.x = .3f;
-                    transform.localScale = scale;
-                    rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
-                }
-                else if (mouseWorld.x < xpos)
-                {
-                    Vector3 scale = transform.localScale;
-                    scale.x = -.3f;
-                    transform.localScale = scale;
-                    rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
+                    if (mouseWorld.x > xpos)
+                    {
+                        Vector3 scale = transform.localScale;
+                        scale.x = .3f;
+                        transform.localScale = scale;
+                        rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
+                    }
+                    else if (mouseWorld.x < xpos)
+                    {
+                        Vector3 scale = transform.localScale;
+                        scale.x = -.3f;
+                        transform.localScale = scale;
+                        rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
+                    }
                 }
             }
-            else
-            {
-                rigidBody.velocity = new Vector2(0, -20);
-            }
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, 1f, ground.value))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

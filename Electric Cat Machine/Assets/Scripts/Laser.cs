@@ -26,6 +26,7 @@ public class Laser : MonoBehaviour
         {
             babyNinja = (GameObject)Instantiate(Resources.Load("BabyNinja"));
             babyNinja.transform.position = this.transform.position;
+            babyNinja.GetComponent <Rigidbody2D>().AddForce(new Vector2(200, 200));
         }
         if (Input.GetMouseButton(0))
         {
