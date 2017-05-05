@@ -51,7 +51,6 @@ public class Mechanics : MonoBehaviour
         }
 
         float horizontal = Input.GetAxis("Horizontal");
-        Debug.Log(horizontal);
 
         HandleControls(horizontal);
     }
