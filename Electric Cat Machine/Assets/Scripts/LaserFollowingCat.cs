@@ -32,7 +32,7 @@ public class LaserFollowingCat : Cat
             }
         }
 
-        // Cat mouse-follow behavior
+        // Cat follows position of cursor/laser
         else if (IsGrounded() && alive)
         {
             float xpos = this.transform.position.x;
@@ -51,9 +51,10 @@ public class LaserFollowingCat : Cat
     {
         if (alive)
         {
-            Destroy(gameObject, 5);
-            rigidBody.velocity = new Vector2(10, rigidBody.velocity.y);
             alive = false;
+            playerAttributes.isShiningLaser = false;
+            rigidBody.velocity = new Vector2(10, rigidBody.velocity.y);
+            Destroy(gameObject, 5);
         }
     }
 
@@ -61,6 +62,5 @@ public class LaserFollowingCat : Cat
     {
         base.OnDestroy();
         playerAttributes.isShiningLaser = false;
-
     }
 }

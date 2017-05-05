@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RunningCat : Cat
 {
-
     protected override void Start()
     {
         // Run regular setup
@@ -16,10 +15,9 @@ public class RunningCat : Cat
 
     protected override void Move()
     {
-
         if (IsGrounded())
         {
-            rigidBody.velocity = new Vector2(10 * facing, rigidBody.velocity.y);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x * 1.2f, rigidBody.velocity.y);
         }
     }
 

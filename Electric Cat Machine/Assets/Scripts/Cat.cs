@@ -81,5 +81,11 @@ public abstract class Cat : MonoBehaviour
     }
 
     // Each cat type implements its own Move logic
-    protected abstract void Move();
+    protected virtual void Move()
+    {
+        if (!alive)
+        {
+            rigidBody.AddForce(new Vector2(rigidBody.velocity.x * 10f, rigidBody.velocity.x));
+        }
+    }
 }

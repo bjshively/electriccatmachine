@@ -19,7 +19,6 @@ public class Mechanics : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-       
         isShiningLaser = false;
         canThrowCat = true;
 
@@ -41,6 +40,11 @@ public class Mechanics : MonoBehaviour
             facing = -1;
         }
 
+        HandleControls();
+    }
+
+    public void HandleControls()
+    {
         // Throw a regular cat
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -54,23 +58,20 @@ public class Mechanics : MonoBehaviour
             ThrowCat("LaserFollowingCat");
         }
 
-
+        // While button is held, shine laser
         if (Input.GetMouseButton(0))
         {
-            lineRenderer.enabled = true;
-
-            if (Input.GetMouseButton(0))
+            if (isShiningLaser)
             {
-                if (isShiningLaser)
-                {
-                    lineRenderer.SetPositions(new Vector3[]{ this.transform.position, mouseWorld });
-                }
+                lineRenderer.enabled = true;
+                lineRenderer.SetPositions(new Vector3[]{ this.transform.position, mouseWorld });
             }
         }
+
+        // Disable laser when mouse button isn't pressed
         else
         {
             lineRenderer.enabled = false;
-            isShiningLaser = false;
         }
 
     }
