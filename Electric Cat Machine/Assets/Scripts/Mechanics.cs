@@ -12,11 +12,13 @@ public class Mechanics : MonoBehaviour
     private int facing;
 
     private GameObject babyNinja;
-    private GameObject laserPointer;
+    private GameObject laserOrigin;
 
     // Mechanics
     public bool canThrowCat;
     public bool isShiningLaser;
+    private bool canMove;
+
 
     private GameObject cat;
 
@@ -32,7 +34,7 @@ public class Mechanics : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
 
-        laserPointer = GameObject.Find("LaserOrigin");
+        laserOrigin = GameObject.Find("LaserOrigin");
     }
 
     // Update is called once per frame
@@ -49,20 +51,25 @@ public class Mechanics : MonoBehaviour
         }
 
         float horizontal = Input.GetAxis("Horizontal");
+        Debug.Log(horizontal);
+
         HandleControls(horizontal);
     }
 
     public void HandleControls(float horizontal)
     {
-        if (horizontal > 0)
+        if (canMove)
         {
-            rigidBody.AddForce(Vector2.right);
-            facing = 1;
-        }
-        else if (horizontal < 0)
-        {
-            rigidBody.AddForce(Vector2.left);
-            facing = -1;
+            if (horizontal > 0)
+            {
+                rigidBody.velocity = Vector2.right * 3;
+                facing = 1;
+            }
+            else if (horizontal < 0)
+            {
+                rigidBody.velocity = Vector2.left * 3;
+                facing = -1;
+            }
         }
 
         // Throw a regular cat
@@ -83,8 +90,10 @@ public class Mechanics : MonoBehaviour
         {
             if (isShiningLaser)
             {
+                canMove = false;
+                rigidBody.velocity = Vector2.zero;
                 lineRenderer.enabled = true;
-                lineRenderer.SetPositions(new Vector3[]{ laserPointer.transform.position, mouseWorld });
+                lineRenderer.SetPositions(new Vector3[]{ laserOrigin.transform.position, mouseWorld });
             }
         }
 
@@ -92,6 +101,7 @@ public class Mechanics : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
+            canMove = true;
         }
 
     }

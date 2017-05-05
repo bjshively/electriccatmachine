@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50506141608949494}
   - component: {fileID: 61733493338892394}
   - component: {fileID: 114127072369942396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LaserFollowingCat
   m_TagString: Cat
   m_Icon: {fileID: 0}
