@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114127072369942396}
   m_Layer: 0
   m_Name: LaserFollowingCat
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
+  facing: 0
+  alive: 0
 --- !u!212 &212387638690256566
 SpriteRenderer:
   m_ObjectHideFlags: 1

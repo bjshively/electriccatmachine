@@ -16,14 +16,14 @@ public class CameraFollow : MonoBehaviour
     private float yMin;
 
     [SerializeField]
-    private string playerObject;
+    public string objectToFollow;
     private Transform target;
 
     // Use this for initialization
     void Start()
     {
         //Sets a reference to the player
-        target = GameObject.Find(playerObject).transform;
+        target = GameObject.Find(objectToFollow).transform;
     }
 
     // Update is called once per frame

@@ -117,6 +117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c3f3a0ddb164b54b9d33609c9b2664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
+  facing: 0
+  alive: 0
 --- !u!212 &212275740384486222
 SpriteRenderer:
   m_ObjectHideFlags: 1

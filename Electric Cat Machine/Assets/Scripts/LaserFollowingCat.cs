@@ -2,65 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserFollowingCat : MonoBehaviour
+public class LaserFollowingCat : Cat
 {
-    private Vector3 mouseWorld;
-    private Rigidbody2D rigidBody;
-    public LayerMask ground;
-    // Use this for initialization
-    void Start()
-    {
-        rigidBody = GetComponent<Rigidbody2D>();
-    }
-	
-    // Update is called once per frame
-    void FixedUpdate()
+    protected override void Move()
     {
         Flip();
-        mouseWorld = Input.mousePosition;
-        mouseWorld.z = 10.0f;
-        mouseWorld = Camera.main.ScreenToWorldPoint(mouseWorld);
-        float xpos = this.transform.position.x;
-
-        if (Input.GetMouseButton(0))
+        if (!Input.GetMouseButton(0))
         {
-            if (IsGrounded())
+            alive = false;
+        }
+
+        if (IsGrounded())
+        {
+            
+            float xpos = this.transform.position.x;
+            if (mouseWorld.x > xpos)
             {
-                if (mouseWorld.x > xpos)
-                {
-                    rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
-                }
-                else if (mouseWorld.x < xpos)
-                {
-                    rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
-                }
+                rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
+            }
+            else if (mouseWorld.x < xpos)
+            {
+                rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
             }
         }
-    }
-
-    private bool IsGrounded()
-    {
-        if (Physics2D.Raycast(this.transform.position, Vector2.down, 1f, ground.value))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private void Flip()
-    {
-        Vector3 scale = transform.localScale;
-        if (mouseWorld.x > this.transform.position.x)
-        {
-            scale.x = .3f;
-        }
-        else
-        {
-            scale.x = -.3f;
-        }
-        transform.localScale = scale;
     }
 }

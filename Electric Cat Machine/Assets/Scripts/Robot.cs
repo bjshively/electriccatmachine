@@ -174,7 +174,6 @@ public class Robot : MonoBehaviour
     // Determine if the player is touching the ground
     private bool IsGrounded()
     {
-//        return jumpCollider.IsTouchingLayers(whatIsGround);
         if (Physics2D.Raycast(jumpCollider.transform.position, Vector2.down, 0.2f, whatIsGround.value))
         {
             return true;

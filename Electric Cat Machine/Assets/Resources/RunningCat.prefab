@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 95774573081749110}
   - component: {fileID: 50493804235766398}
   - component: {fileID: 61417774816250784}
-  - component: {fileID: 114788895339397794}
+  - component: {fileID: 114473168650386614}
   m_Layer: 0
   m_Name: RunningCat
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114788895339397794
+--- !u!114 &114473168650386614
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,12 +114,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1705435947260728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c3f3a0ddb164b54b9d33609c9b2664, type: 3}
+  m_Script: {fileID: 11500000, guid: 74bb345f31aec439ba9509bc3e3d6838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseWorld: {x: 0, y: 0, z: 0}
-  rigidBody: {fileID: 0}
-  ground: {}
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
+  facing: 0
+  alive: 0
 --- !u!212 &212850624292027022
 SpriteRenderer:
   m_ObjectHideFlags: 1
