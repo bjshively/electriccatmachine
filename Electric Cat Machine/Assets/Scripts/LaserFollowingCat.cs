@@ -53,7 +53,7 @@ public class LaserFollowingCat : Cat
         {
             alive = false;
             playerAttributes.isShiningLaser = false;
-            rigidBody.velocity = new Vector2(10, rigidBody.velocity.y);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x * 3f, rigidBody.velocity.y);
             Destroy(gameObject, 5);
         }
     }
