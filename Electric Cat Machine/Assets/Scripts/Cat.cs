@@ -80,6 +80,13 @@ public abstract class Cat : MonoBehaviour
         playerAttributes.canThrowCat = true;
     }
 
+
+    // Destroy cat when it goes off screen (no longer visible to Camera)
+    protected virtual void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
     // Each cat type implements its own Move logic
     protected virtual void Move()
     {
