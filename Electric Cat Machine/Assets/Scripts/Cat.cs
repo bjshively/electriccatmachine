@@ -8,6 +8,8 @@ public abstract class Cat : MonoBehaviour
     protected Vector3 mouseWorld;
     protected Rigidbody2D rigidBody;
     public LayerMask ground;
+
+    // Attributes
     public int facing;
     public bool alive;
 
@@ -33,6 +35,7 @@ public abstract class Cat : MonoBehaviour
         }
     }
 
+    // Flip the cat sprite to face the mouse cursor
     protected virtual void Flip()
     {
         Vector3 scale = transform.localScale;
@@ -47,6 +50,7 @@ public abstract class Cat : MonoBehaviour
         transform.localScale = scale;
     }
 
+    // Return true if the cat is touching the ground
     public bool IsGrounded()
     {
         if (Physics2D.Raycast(this.transform.position, Vector2.down, 1f, ground.value))
@@ -59,11 +63,13 @@ public abstract class Cat : MonoBehaviour
         }
     }
 
+    // Immediately destroy the cat
     protected virtual void Kill()
     {
         Destroy(gameObject);
     }
 
+    // Each cat type implements its own Move logic
     protected abstract void Move();
 
 }
