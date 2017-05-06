@@ -24,7 +24,7 @@ public class Mechanics : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
+//        Cursor.visible = false;
         isShiningLaser = false;
         canThrowCat = true;
 

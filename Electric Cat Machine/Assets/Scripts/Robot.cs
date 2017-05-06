@@ -74,8 +74,8 @@ public class Robot : MonoBehaviour
         //Handles the animator layers
         //HandleLayers();
 
-        Debug.Log("grounded: " + grounded);
-        Debug.Log("jump: " + jump);
+//        Debug.Log("grounded: " + grounded);
+//        Debug.Log("jump: " + jump);
 
 
         //Resets all actions
@@ -105,19 +105,6 @@ public class Robot : MonoBehaviour
 
     private void HandleInput()
     {
-        // Don't process any input if the player is attacking
-//        if (myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-//        {
-//            myRigidbody.velocity = Vector2.zero;
-//        }
-
-
-        // This is a quick hack to test loading another scene
-//        if (Input.GetKeyDown(KeyCode.Z))
-//        {
-//            Application.LoadLevel("MainScene");
-//        }
-//
         if (Input.GetKeyDown(KeyCode.W) && grounded)
         {
             grounded = false;
@@ -125,14 +112,6 @@ public class Robot : MonoBehaviour
             myAnimator.SetBool("jump", true);
         }
 
-//        if (Input.GetKeyDown(KeyCode.LeftShift))
-//        {
-//            attack = true;
-//            myRigidbody.velocity = Vector2.zero;
-//            HandleAttacks();
-//        }
-//        else
-//        {
         if (grounded || airControl)
         {
 //            myAnimator.SetBool("jump", false);
