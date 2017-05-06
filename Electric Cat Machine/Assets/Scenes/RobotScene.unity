@@ -176,6 +176,16 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114023730195352780, guid: 445fb22fd94b84797b4819e200529bdd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50447497360988368, guid: 445fb22fd94b84797b4819e200529bdd,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 445fb22fd94b84797b4819e200529bdd, type: 2}
   m_IsPrefabParent: 0
@@ -429,6 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b2831782c6a4882b1d4524ab4c7731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 10
+  jumpForce: 14
   canThrowCat: 0
   isShiningLaser: 0
   ground:
