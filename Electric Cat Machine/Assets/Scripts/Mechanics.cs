@@ -13,12 +13,19 @@ public class Mechanics : MonoBehaviour
 
     private GameObject babyNinja;
     private GameObject laserOrigin;
+    public float maxSpeed = 15f;
+    public float jumpForce = 70f;
+
+
 
     // Mechanics
     public bool canThrowCat;
     public bool isShiningLaser;
     private bool canMove;
+    private bool canJump;
 
+    [SerializeField]
+    public LayerMask ground;
 
     private GameObject cat;
 
@@ -27,6 +34,7 @@ public class Mechanics : MonoBehaviour
 //        Cursor.visible = false;
         isShiningLaser = false;
         canThrowCat = true;
+        canJump = true;
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.sortingLayerName = "Laser";
@@ -57,17 +65,27 @@ public class Mechanics : MonoBehaviour
 
     public void HandleControls(float horizontal)
     {
+        Debug.Log(IsGrounded());
+        if (IsGrounded())
+        {
+            canJump = true;
+        }
+
         if (canMove)
         {
+            rigidBody.velocity = new Vector2(maxSpeed * horizontal, rigidBody.velocity.y);
             if (horizontal > 0)
             {
-                rigidBody.velocity = Vector2.right * 3;
                 facing = 1;
             }
             else if (horizontal < 0)
             {
-                rigidBody.velocity = Vector2.left * 3;
                 facing = -1;
+            }
+
+            if (canJump && Input.GetKeyDown(KeyCode.W))
+            {
+                Jump();
             }
         }
 
@@ -78,7 +96,7 @@ public class Mechanics : MonoBehaviour
         }
 
         // Shine laser. Throw a laser pointer chasing cat
-        if (Input.GetMouseButtonDown(0) && !isShiningLaser)
+        if (Input.GetMouseButtonDown(0) && !isShiningLaser && IsGrounded())
         {
             // TODO: Freeze player movement when laser pointer is active
             ThrowCat("LaserFollowingCat");
@@ -103,6 +121,27 @@ public class Mechanics : MonoBehaviour
             canMove = true;
         }
 
+    }
+
+    public bool IsGrounded()
+    {
+        if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void Jump()
+    {
+        if (canJump)
+        {
+            canJump = false;
+            rigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        }
     }
 
     public void ThrowCat(string catType)

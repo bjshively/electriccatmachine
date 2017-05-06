@@ -61,35 +61,45 @@ public class Robot : MonoBehaviour
         {
             myAnimator.SetBool("jump", false);
         }
-
-        //Flips the player in the correct direction
+            
         Flip(horizontal);
-
-        //Handles the player's movement
         HandleMovement(horizontal);
-
-        //Handles the player's attacks
         HandleAttacks();
-
-        //Handles the animator layers
-        //HandleLayers();
-
-//        Debug.Log("grounded: " + grounded);
-//        Debug.Log("jump: " + jump);
-
-
-        //Resets all actions
-        ResetActions();
+//        ResetActions();
     }
 
     // ##################################################
     // Player Actions
     // ##################################################
+
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && grounded)
+        {
+            jump = true;
+            myAnimator.SetBool("jump", true);
+        }
+
+        if (grounded || airControl)
+        {
+            //            myAnimator.SetBool("jump", false);
+            float horizontal = Input.GetAxis("Horizontal");
+            myRigidbody.AddForce(new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y));
+
+            // Set speed inside animator for controlling run animation
+            myAnimator.SetFloat("speed", Mathf.Abs(horizontal * movementSpeed));
+            Flip(horizontal);
+        }
+        //        }
+    }
+
     private void HandleMovement(float horizontal)
     {
         if (grounded && jump) //if we should jump
         {
-            myRigidbody.AddForce(new Vector2(0f, 400));
+            jump = false;
+            myRigidbody.AddForce(new Vector2(myRigidbody.velocity.x, 5), ForceMode2D.Impulse);
         }
     }
 
@@ -101,28 +111,6 @@ public class Robot : MonoBehaviour
             myRigidbody.velocity = Vector2.zero;
             myAnimator.SetTrigger("attack");
         }
-    }
-
-    private void HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.W) && grounded)
-        {
-            grounded = false;
-            jump = true;
-            myAnimator.SetBool("jump", true);
-        }
-
-        if (grounded || airControl)
-        {
-//            myAnimator.SetBool("jump", false);
-            float horizontal = Input.GetAxis("Horizontal");
-            myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
-
-            // Set speed inside animator for controlling run animation
-            myAnimator.SetFloat("speed", Mathf.Abs(horizontal * movementSpeed));
-            Flip(horizontal);
-        }
-//        }
     }
 
     // Flip player sprite to face the correct direction based on movement
@@ -139,21 +127,10 @@ public class Robot : MonoBehaviour
         }
     }
 
-    private void ResetActions()
-    {
-        attack = false;
-        if (IsGrounded())
-        {
-            jump = false;   
-        }
-        slide = false;
-
-    }
-
     // Determine if the player is touching the ground
     private bool IsGrounded()
     {
-        if (Physics2D.Raycast(jumpCollider.transform.position, Vector2.down, 0.2f, whatIsGround.value))
+        if (Physics2D.Raycast(jumpCollider.transform.position, Vector2.down, 0.4f, whatIsGround.value))
         {
             return true;
         }
