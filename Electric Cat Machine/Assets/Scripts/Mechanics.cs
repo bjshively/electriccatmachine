@@ -14,8 +14,8 @@ public class Mechanics : MonoBehaviour
 
     private GameObject babyNinja;
     private GameObject laserOrigin;
-    public float maxSpeed = 15f;
-    public float jumpForce = 70f;
+    private float maxSpeed = 10f;
+    private float jumpForce = 14f;
 
 
 
