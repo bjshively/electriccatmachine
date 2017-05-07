@@ -6,6 +6,7 @@ public class Mechanics : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     private Rigidbody2D rigidBody;
+    private Animator animator;
 
     private Vector3 laserPoint;
     private Vector3 mouseWorld;
@@ -41,6 +42,8 @@ public class Mechanics : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
 
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
 
         laserOrigin = GameObject.Find("LaserOrigin");
     }
@@ -127,10 +130,12 @@ public class Mechanics : MonoBehaviour
     {
         if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value))
         {
+            animator.SetBool("grounded", true);
             return true;
         }
         else
         {
+            animator.SetBool("grounded", false);
             return false;
         }
     }
@@ -152,6 +157,7 @@ public class Mechanics : MonoBehaviour
             babyNinja = (GameObject)Instantiate(Resources.Load(catType));
             babyNinja.tag = "Cat";
             babyNinja.transform.position = this.transform.position;
+            //TODO: Make cats throw at about the same speed the player is currently moving (i.e. running jump and throw)
             babyNinja.GetComponent <Rigidbody2D>().AddForce(new Vector2(200 * facing, 200));
 
             // Facing is actually throwing direction, which is towards the cursor
