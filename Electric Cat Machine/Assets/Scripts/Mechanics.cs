@@ -11,6 +11,7 @@ public class Mechanics : MonoBehaviour
     private Animator animator;
 
     // Values
+    private Vector3 startingPoint;
     private Vector3 laserPoint;
     private Vector3 mouseWorld;
     private bool facingRight;
@@ -44,6 +45,8 @@ public class Mechanics : MonoBehaviour
         canThrowCat = true;
         canJump = true;
         facingRight = true;
+
+        startingPoint = transform.position;
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.sortingLayerName = "Laser";
@@ -205,4 +208,15 @@ public class Mechanics : MonoBehaviour
             babyNinja.GetComponent <Cat>().facingRight = facingRight;
         }
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.collider.gameObject.layer);
+    }
+
+    public void Kill()
+    {
+        transform.position = startingPoint;
+    }
+
 }
