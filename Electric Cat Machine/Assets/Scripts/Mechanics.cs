@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Mechanics : MonoBehaviour
 {
+    // Components
     private LineRenderer lineRenderer;
     private Rigidbody2D rigidBody;
     private Animator animator;
 
+    // Values
     private Vector3 laserPoint;
     private Vector3 mouseWorld;
     private bool facingRight;
+    private bool grounded;
+
 
     private GameObject babyNinja;
     private GameObject laserOrigin;
@@ -46,7 +51,6 @@ public class Mechanics : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
         laserOrigin = GameObject.Find("LaserOrigin");
 
     }
@@ -75,7 +79,7 @@ public class Mechanics : MonoBehaviour
 //        {
 //            facingRight = false;
 //        }
-
+        grounded = IsGrounded();
         float horizontal = Input.GetAxis("Horizontal");
         Flip(horizontal);
         HandleControls(horizontal);
@@ -83,7 +87,7 @@ public class Mechanics : MonoBehaviour
 
     public void HandleControls(float horizontal)
     {
-        if (IsGrounded())
+        if (grounded)
         {
             canJump = true;
         }
@@ -114,7 +118,7 @@ public class Mechanics : MonoBehaviour
         }
 
         // Shine laser. Throw a laser pointer chasing cat
-        if (Input.GetMouseButtonDown(0) && !isShiningLaser && IsGrounded())
+        if (Input.GetMouseButtonDown(0) && !isShiningLaser && grounded)
         {
             // TODO: Freeze player movement when laser pointer is active
             ThrowCat("LaserFollowingCat");
@@ -177,6 +181,9 @@ public class Mechanics : MonoBehaviour
 
     private void Jump()
     {
+
+        //TODO: There is a bug with jump animation from idle state. Gets stuck in jump animation until jumping again.
+
         if (canJump)
         {
             animator.SetBool("jump", true);
