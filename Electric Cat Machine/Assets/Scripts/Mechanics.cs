@@ -181,9 +181,6 @@ public class Mechanics : MonoBehaviour
 
     private void Jump()
     {
-
-        //TODO: There is a bug with jump animation from idle state. Gets stuck in jump animation until jumping again.
-
         if (canJump)
         {
             animator.SetBool("jump", true);
