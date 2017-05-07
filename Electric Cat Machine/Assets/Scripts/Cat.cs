@@ -11,7 +11,7 @@ public abstract class Cat : MonoBehaviour
     protected Mechanics playerAttributes;
 
     // Attributes
-    public int facing;
+    public bool facingRight;
     public bool alive;
 
     // Use this for initialization

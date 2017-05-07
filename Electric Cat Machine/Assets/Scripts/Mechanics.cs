@@ -10,7 +10,7 @@ public class Mechanics : MonoBehaviour
 
     private Vector3 laserPoint;
     private Vector3 mouseWorld;
-    private int facing;
+    private bool facingRight;
 
     private GameObject babyNinja;
     private GameObject laserOrigin;
@@ -36,6 +36,7 @@ public class Mechanics : MonoBehaviour
         isShiningLaser = false;
         canThrowCat = true;
         canJump = true;
+        facingRight = true;
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.sortingLayerName = "Laser";
@@ -55,14 +56,19 @@ public class Mechanics : MonoBehaviour
         mouseWorld.z = 10.0f;
         mouseWorld = Camera.main.ScreenToWorldPoint(mouseWorld);
 
-        facing = 1;
-        if (this.transform.position.x > mouseWorld.x)
-        {
-            facing = -1;
-        }
+
+        // This is needed for the laser pointer look behavior
+        // but it causes issues with the Flip() function
+        // Need to move it so its only called when shining laser
+
+//        facingRight = true;
+//        if (this.transform.position.x > mouseWorld.x)
+//        {
+//            facingRight = false;
+//        }
 
         float horizontal = Input.GetAxis("Horizontal");
-
+        Flip(horizontal);
         HandleControls(horizontal);
     }
 
@@ -76,15 +82,16 @@ public class Mechanics : MonoBehaviour
 
         if (canMove)
         {
+            animator.SetFloat("speed", Mathf.Abs(horizontal * maxSpeed));
             rigidBody.velocity = new Vector2(maxSpeed * horizontal, rigidBody.velocity.y);
-            if (horizontal > 0)
-            {
-                facing = 1;
-            }
-            else if (horizontal < 0)
-            {
-                facing = -1;
-            }
+//            if (horizontal > 0)
+//            {
+//                facing = 1;
+//            }
+//            else if (horizontal < 0)
+//            {
+//                facing = -1;
+//            }
 
             if (canJump && Input.GetKeyDown(KeyCode.W))
             {
@@ -126,10 +133,26 @@ public class Mechanics : MonoBehaviour
 
     }
 
+    // Flip player sprite to face the correct direction based on movement
+    private void Flip(float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            Debug.Log("Flipping");
+            facingRight = !facingRight;
+
+            // Flip x scale, update Player's localScale
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+    }
+
     public bool IsGrounded()
     {
         if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value))
         {
+            animator.SetBool("jump", false);
             animator.SetBool("falling", false);
             animator.SetBool("grounded", true);
             return true;
@@ -149,6 +172,7 @@ public class Mechanics : MonoBehaviour
     {
         if (canJump)
         {
+            animator.SetBool("jump", true);
             canJump = false;
             rigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
@@ -163,11 +187,11 @@ public class Mechanics : MonoBehaviour
             babyNinja.tag = "Cat";
             babyNinja.transform.position = this.transform.position;
             //TODO: Make cats throw at about the same speed the player is currently moving (i.e. running jump and throw)
-            babyNinja.GetComponent <Rigidbody2D>().AddForce(new Vector2(200 * facing, 200));
+            babyNinja.GetComponent <Rigidbody2D>().AddForce(new Vector2(200, 200));
 
             // Facing is actually throwing direction, which is towards the cursor
             // This tells which way to throw the cat, and the cat to face
-            babyNinja.GetComponent <Cat>().facing = facing;
+            babyNinja.GetComponent <Cat>().facingRight = facingRight;
         }
     }
 }
