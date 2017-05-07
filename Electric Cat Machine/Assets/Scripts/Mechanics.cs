@@ -32,7 +32,9 @@ public class Mechanics : MonoBehaviour
 
     void Start()
     {
-//        Cursor.visible = false;
+        // Invisible cursor applies to all of Unity and makes debugging difficult.
+        // May want to only set this when shining laser.
+        // Cursor.visible = false;
         isShiningLaser = false;
         canThrowCat = true;
         canJump = true;
@@ -45,18 +47,25 @@ public class Mechanics : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-
         laserOrigin = GameObject.Find("LaserOrigin");
+
+    }
+
+    void Update()
+    {
+        // Converts mouse coords to world coords for drawing vectors
+        mouseWorld = Input.mousePosition;
+        mouseWorld.z = 10.0f;
+        mouseWorld = Camera.main.ScreenToWorldPoint(mouseWorld);
+
+        // Maintains the relative position for the laser origin point
+        laserOrigin.transform.parent = gameObject.transform;
+        laserOrigin.transform.localPosition = new Vector2(0.09f, 0.33f);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        mouseWorld = Input.mousePosition;
-        mouseWorld.z = 10.0f;
-        mouseWorld = Camera.main.ScreenToWorldPoint(mouseWorld);
-
-
         // This is needed for the laser pointer look behavior
         // but it causes issues with the Flip() function
         // Need to move it so its only called when shining laser

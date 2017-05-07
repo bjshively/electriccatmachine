@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 1700022689}
   - component: {fileID: 1700022688}
   - component: {fileID: 1700022691}
+  - component: {fileID: 1700022692}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -471,8 +472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b2831782c6a4882b1d4524ab4c7731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  jumpForce: 14
   canThrowCat: 0
   isShiningLaser: 0
   ground:
@@ -523,6 +522,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.56, y: 4.26}
   m_EdgeRadius: 0
+--- !u!95 &1700022692
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1700022685}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &2101560447
 Prefab:
   m_ObjectHideFlags: 0
