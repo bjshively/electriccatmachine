@@ -83,7 +83,6 @@ public class Mechanics : MonoBehaviour
 
     public void HandleControls(float horizontal)
     {
-        Debug.Log(IsGrounded());
         if (IsGrounded())
         {
             canJump = true;
@@ -147,7 +146,6 @@ public class Mechanics : MonoBehaviour
     {
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
-            Debug.Log("Flipping");
             facingRight = !facingRight;
 
             // Flip x scale, update Player's localScale
