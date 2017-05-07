@@ -23,16 +23,8 @@ public class RunningCat : Cat
 
     protected override void Flip()
     {
-        if (facingRight && (mouseWorld.x < gameObject.transform.position.x))
+        if (!facingRight)
         {
-            facingRight = false;
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
-        }
-        else if (!facingRight && (mouseWorld.x > gameObject.transform.position.x))
-        {
-            facingRight = true;
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;

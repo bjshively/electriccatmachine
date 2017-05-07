@@ -201,8 +201,19 @@ public class Mechanics : MonoBehaviour
             babyNinja = (GameObject)Instantiate(Resources.Load(catType));
             babyNinja.tag = "Cat";
             babyNinja.transform.position = this.transform.position;
+           
             //TODO: Make cats throw at about the same speed the player is currently moving (i.e. running jump and throw)
-            babyNinja.GetComponent <Rigidbody2D>().AddForce(new Vector2(200, 200));
+            Vector2 throwForce;
+            if (facingRight)
+            {
+                throwForce = new Vector2(rigidBody.velocity.x + 200, 200);
+            }
+            else
+            {
+                throwForce = new Vector2(rigidBody.velocity.x + -200, 200);
+            }
+
+            babyNinja.GetComponent <Rigidbody2D>().AddForce(throwForce);
 
             // Facing is actually throwing direction, which is towards the cursor
             // This tells which way to throw the cat, and the cat to face
