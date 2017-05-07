@@ -8,8 +8,6 @@ public class RunningCat : Cat
     {
         // Run regular setup
         base.Start();
-
-        //Start timer to destroy running cat
         Kill();
     }
 
@@ -31,6 +29,8 @@ public class RunningCat : Cat
         }
     }
 
+
+    // Running cats self destruct 3 seconds after spawning
     protected override void Kill()
     {
         Destroy(gameObject, 3);

@@ -77,6 +77,7 @@ public abstract class Cat : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
+        Camera.main.GetComponent<CameraFollow>().target = GameObject.Find("Player").transform;
         playerAttributes.canThrowCat = true;
     }
 

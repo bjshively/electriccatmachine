@@ -7,6 +7,7 @@ public class LaserFollowingCat : Cat
     protected override void Start()
     {
         base.Start();
+        Camera.main.GetComponent<CameraFollow>().target = gameObject.transform;
         playerAttributes.isShiningLaser = true;
     }
 

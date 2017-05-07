@@ -221,11 +221,6 @@ public class Mechanics : MonoBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.collider.gameObject.layer);
-    }
-
     public void Kill()
     {
         rigidBody.velocity = Vector3.zero;
