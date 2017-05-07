@@ -82,6 +82,7 @@ public class Mechanics : MonoBehaviour
 //        {
 //            facingRight = false;
 //        }
+        InBounds();
         grounded = IsGrounded();
         float horizontal = Input.GetAxis("Horizontal");
         Flip(horizontal);
@@ -216,7 +217,18 @@ public class Mechanics : MonoBehaviour
 
     public void Kill()
     {
+        rigidBody.velocity = Vector3.zero;
         transform.position = startingPoint;
+    }
+
+
+    // A very simple bounds check to respawn if you fall off the platforms
+    public void InBounds()
+    {
+        if (transform.position.y < -100)
+        {
+            Kill();
+        }
     }
 
 }
