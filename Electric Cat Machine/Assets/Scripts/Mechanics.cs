@@ -130,11 +130,16 @@ public class Mechanics : MonoBehaviour
     {
         if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value))
         {
+            animator.SetBool("falling", false);
             animator.SetBool("grounded", true);
             return true;
         }
         else
         {
+            if (rigidBody.velocity.y < 0)
+            {
+                animator.SetBool("falling", true);
+            }
             animator.SetBool("grounded", false);
             return false;
         }
