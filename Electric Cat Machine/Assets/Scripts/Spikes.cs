@@ -11,5 +11,9 @@ public class Spikes : MonoBehaviour
         {
             other.gameObject.GetComponent<Mechanics>().Kill();
         }
+        else if (other.gameObject.layer == 10)
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
