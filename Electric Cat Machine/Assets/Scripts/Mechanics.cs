@@ -50,7 +50,6 @@ public class Mechanics : MonoBehaviour
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.sortingLayerName = "Laser";
-        lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
 
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -200,7 +199,7 @@ public class Mechanics : MonoBehaviour
             canThrowCat = false;
             babyNinja = (GameObject)Instantiate(Resources.Load(catType));
             babyNinja.tag = "Cat";
-            babyNinja.transform.position = this.transform.position;
+            babyNinja.transform.position = transform.position;
            
             //TODO: Make cats throw at about the same speed the player is currently moving (i.e. running jump and throw)
             Vector2 throwForce;
@@ -236,5 +235,4 @@ public class Mechanics : MonoBehaviour
             Kill();
         }
     }
-
 }

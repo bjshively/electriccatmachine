@@ -578,11 +578,13 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 1
+    UNet: 1
   facebookSdkVersion: 7.9.1
   apiCompatibilityLevel: 2
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: a60405f8-6bd8-461d-90c5-1e57f3137edb
+  projectName: Electric Cat Machine
+  organizationId: bjshively
   cloudEnabled: 0
   enableNewInputSystem: 0
