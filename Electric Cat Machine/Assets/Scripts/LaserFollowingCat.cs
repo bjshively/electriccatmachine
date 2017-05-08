@@ -24,6 +24,7 @@ public class LaserFollowingCat : Cat
         // This cat begins ignoring the mouse and runs off in the direction it is currently headed
         if (Input.GetMouseButtonUp(0))
         {
+            // TODO: We may want to remove this, if there are puzzles where a cat drops down a level
             if (!IsGrounded())
             {
                 base.Kill();
@@ -54,7 +55,6 @@ public class LaserFollowingCat : Cat
         if (alive)
         {
             alive = false;
-            playerAttributes.isShiningLaser = false;
             rigidBody.velocity = new Vector2(rigidBody.velocity.x * 3f, rigidBody.velocity.y);
             Destroy(gameObject, 5);
         }
@@ -64,5 +64,6 @@ public class LaserFollowingCat : Cat
     {
         base.OnDestroy();
         playerAttributes.isShiningLaser = false;
+        playerAttributes.canMove = true;
     }
 }

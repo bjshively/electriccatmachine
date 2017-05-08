@@ -28,7 +28,7 @@ public class Mechanics : MonoBehaviour
     // Mechanics
     public bool canThrowCat;
     public bool isShiningLaser;
-    private bool canMove;
+    public bool canMove;
     private bool canJump;
 
     [SerializeField]
@@ -44,6 +44,7 @@ public class Mechanics : MonoBehaviour
         isShiningLaser = false;
         canThrowCat = true;
         canJump = true;
+        canMove = true;
         facingRight = true;
 
         startingPoint = transform.position;
@@ -123,7 +124,6 @@ public class Mechanics : MonoBehaviour
         // Shine laser. Throw a laser pointer chasing cat
         if (Input.GetMouseButtonDown(0) && !isShiningLaser && grounded)
         {
-            // TODO: Freeze player movement when laser pointer is active
             ThrowCat("LaserFollowingCat");
         }
 
@@ -133,6 +133,7 @@ public class Mechanics : MonoBehaviour
             if (isShiningLaser)
             {
                 canMove = false;
+                animator.Play("Idle");
                 rigidBody.velocity = Vector2.zero;
                 lineRenderer.enabled = true;
                 lineRenderer.SetPositions(new Vector3[]{ laserOrigin.transform.position, mouseWorld });
@@ -143,7 +144,6 @@ public class Mechanics : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
-            canMove = true;
         }
 
     }
