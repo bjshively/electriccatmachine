@@ -73,15 +73,6 @@ public class Mechanics : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // This is needed for the laser pointer look behavior
-        // but it causes issues with the Flip() function
-        // Need to move it so its only called when shining laser
-
-//        facingRight = true;
-//        if (this.transform.position.x > mouseWorld.x)
-//        {
-//            facingRight = false;
-//        }
         InBounds();
         grounded = IsGrounded();
         float horizontal = Input.GetAxis("Horizontal");
@@ -98,16 +89,9 @@ public class Mechanics : MonoBehaviour
 
         if (canMove)
         {
-            animator.SetFloat("speed", Mathf.Abs(horizontal * maxSpeed));
-            rigidBody.velocity = new Vector2(maxSpeed * horizontal, rigidBody.velocity.y);
-//            if (horizontal > 0)
-//            {
-//                facing = 1;
-//            }
-//            else if (horizontal < 0)
-//            {
-//                facing = -1;
-//            }
+            float currentSpeed = horizontal * maxSpeed;
+            animator.SetFloat("speed", Mathf.Abs(currentSpeed));
+            rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
 
             if (canJump && Input.GetKeyDown(KeyCode.W))
             {
@@ -158,6 +142,16 @@ public class Mechanics : MonoBehaviour
                 facingRight = !facingRight;
 
                 // Flip x scale, update Player's localScale
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+        }
+        else if (isShiningLaser)
+        {
+            if (facingRight && mouseWorld.x < transform.position.x || !facingRight && mouseWorld.x > transform.position.x)
+            {
+                facingRight = !facingRight;
                 Vector3 scale = transform.localScale;
                 scale.x *= -1;
                 transform.localScale = scale;
