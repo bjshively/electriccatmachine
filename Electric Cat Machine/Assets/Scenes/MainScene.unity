@@ -191,6 +191,16 @@ Prefab:
       propertyPath: jumpForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 61933686536719270, guid: 445fb22fd94b84797b4819e200529bdd,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61933686536719270, guid: 445fb22fd94b84797b4819e200529bdd,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.85
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114023730195352780, guid: 445fb22fd94b84797b4819e200529bdd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 445fb22fd94b84797b4819e200529bdd, type: 2}
@@ -273,6 +283,11 @@ Prefab:
     - target: {fileID: 1808267272573766, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 60792227046219266, guid: 48865ebd8a8094b9eb580355a4186220,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
@@ -440,7 +455,23 @@ MonoBehaviour:
   xMin: -5000
   yMax: 5000
   yMin: -5000
-  objectToFollow: Player
+  target: {fileID: 0}
+--- !u!1 &1607643633 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1754467112149702, guid: 48865ebd8a8094b9eb580355a4186220,
+    type: 2}
+  m_PrefabInternal: {fileID: 983770883}
+--- !u!114 &1607643636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1607643633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06be709533ffc43b1af0e6765ce4e118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2000055460 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1674183386696450, guid: 445fb22fd94b84797b4819e200529bdd,
