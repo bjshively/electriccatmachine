@@ -201,6 +201,11 @@ Prefab:
       propertyPath: m_Size.y
       value: 0.85
       objectReference: {fileID: 0}
+    - target: {fileID: 61933686536719270, guid: 445fb22fd94b84797b4819e200529bdd,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: bd76cc05e51c342afb10791f3918e9af, type: 2}
     m_RemovedComponents:
     - {fileID: 114023730195352780, guid: 445fb22fd94b84797b4819e200529bdd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 445fb22fd94b84797b4819e200529bdd, type: 2}
@@ -490,6 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canThrowCat: 1
   isShiningLaser: 0
+  canMove: 0
   ground:
     serializedVersion: 2
     m_Bits: 256
