@@ -133,7 +133,7 @@ public class Mechanics : MonoBehaviour
             if (isShiningLaser)
             {
                 canMove = false;
-                animator.Play("Idle");
+                animator.Play("idle");
                 rigidBody.velocity = Vector2.zero;
                 lineRenderer.enabled = true;
                 lineRenderer.SetPositions(new Vector3[]{ laserOrigin.transform.position, mouseWorld });
@@ -151,14 +151,17 @@ public class Mechanics : MonoBehaviour
     // Flip player sprite to face the correct direction based on movement
     private void Flip(float horizontal)
     {
-        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        if (canMove)
         {
-            facingRight = !facingRight;
+            if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+            {
+                facingRight = !facingRight;
 
-            // Flip x scale, update Player's localScale
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+                // Flip x scale, update Player's localScale
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
         }
     }
 
