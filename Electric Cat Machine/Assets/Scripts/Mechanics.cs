@@ -117,7 +117,7 @@ public class Mechanics : MonoBehaviour
             if (isShiningLaser)
             {
                 canMove = false;
-                animator.Play("idle");
+                animator.Play("Idle");
                 rigidBody.velocity = Vector2.zero;
                 lineRenderer.enabled = true;
                 lineRenderer.SetPositions(new Vector3[]{ laserOrigin.transform.position, mouseWorld });
