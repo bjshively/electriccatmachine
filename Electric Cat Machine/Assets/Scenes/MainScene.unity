@@ -219,11 +219,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4656017909638648, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -9.6
+      value: -9.35
       objectReference: {fileID: 0}
     - target: {fileID: 4656017909638648, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.84
       objectReference: {fileID: 0}
     - target: {fileID: 4656017909638648, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
       propertyPath: m_LocalPosition.z
@@ -293,6 +293,18 @@ Prefab:
         type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656017909638648, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656017909638648, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656017909638648, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48865ebd8a8094b9eb580355a4186220, type: 2}
@@ -405,7 +417,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.16181877, g: 0.30763108, b: 0.53676474, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -416,7 +428,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
