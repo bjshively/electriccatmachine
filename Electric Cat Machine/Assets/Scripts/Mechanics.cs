@@ -32,7 +32,8 @@ public class Mechanics : MonoBehaviour
     private bool canJump;
 
     [SerializeField]
-    public LayerMask ground;
+	public LayerMask ground;
+	public LayerMask crates;
 
     private GameObject cat;
 
@@ -161,7 +162,8 @@ public class Mechanics : MonoBehaviour
 
     public bool IsGrounded()
     {
-        if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value))
+		if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value) ||
+			Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, crates.value))
         {
             animator.SetBool("jump", false);
             animator.SetBool("falling", false);
