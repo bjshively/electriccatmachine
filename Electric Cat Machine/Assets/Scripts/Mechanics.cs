@@ -172,9 +172,10 @@ public class Mechanics : MonoBehaviour
         }
         else
         {
-            if (rigidBody.velocity.y < 0)
+            if (rigidBody.velocity.y < -1)
             {
-                animator.SetBool("falling", true);
+				Debug.Log (rigidBody.velocity.y);
+				animator.SetBool("falling", true);
             }
             animator.SetBool("grounded", false);
             return false;
