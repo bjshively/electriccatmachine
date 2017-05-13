@@ -9,7 +9,7 @@ TODO: Always eject a cat with the jumping sprite.
 
 
 // CRATES
-TODO: Wood boxes should break when they fall.
+TODO: Wood crates should break when they fall, unless smashing into another wooden crate.
 The gray tiles in the level are supposed to be "pipes."
 TODO: The crate in that area should be assigned to the pipe.
 TODO: The pipe should eject a new crate whenever that assigned crate is lost. Pit or destoryed.
@@ -36,3 +36,4 @@ TODO: The pipe should eject a new crate whenever that assigned crate is lost. Pi
 
 
 
+*/
