@@ -24,6 +24,7 @@ public class Mechanics : MonoBehaviour
     private float targetSpeed;
     private float currentSpeed;
     private float accelerationRate = .1f;
+    private float deccelerationRate = .2f;
     private float jumpForce = 14f;
 
 
@@ -115,23 +116,20 @@ public class Mechanics : MonoBehaviour
             }
             else
             {
-                if ((rigidBody.velocity.x < .2) && rigidBody.velocity.x > -.2)
+                if ((rigidBody.velocity.x < .21) && rigidBody.velocity.x > -.21)
                 {
                     currentSpeed = 0;
                     rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
                 }
                 targetSpeed = 0;
-                if (rigidBody.velocity.x > targetSpeed)
-                {
-                    currentSpeed = rigidBody.velocity.x - accelerationRate * 2;
-                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
-                }
-                else if (rigidBody.velocity.x < targetSpeed)
-                {
-                    currentSpeed = rigidBody.velocity.x + accelerationRate * 2;
-                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
-                }
 
+                // Decellerate if no input
+                if (Mathf.Abs(rigidBody.velocity.x) > targetSpeed)
+                {
+                    // Decrease speed based on sign of current velocity * decelleration rate
+                    currentSpeed = rigidBody.velocity.x + (deccelerationRate * -(Mathf.Sign(rigidBody.velocity.x)));
+                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
+                }
             }
 
             animator.SetFloat("speed", Mathf.Abs(currentSpeed));
