@@ -43,11 +43,11 @@ public abstract class Cat : MonoBehaviour
         Vector3 scale = transform.localScale;
         if (mouseWorld.x > this.transform.position.x)
         {
-            scale.x = .3f;
+            scale.x = 2f;
         }
         else
         {
-            scale.x = -.3f;
+            scale.x = -2f;
         }
         transform.localScale = scale;
     }
