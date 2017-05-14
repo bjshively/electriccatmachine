@@ -32,8 +32,8 @@ public class Mechanics : MonoBehaviour
     private bool canJump;
 
     [SerializeField]
-	public LayerMask ground;
-	public LayerMask crates;
+    public LayerMask ground;
+    public LayerMask crates;
 
     private GameObject cat;
 
@@ -115,14 +115,7 @@ public class Mechanics : MonoBehaviour
         // While button is held, shine laser
         if (Input.GetMouseButton(0))
         {
-            if (isShiningLaser)
-            {
-                canMove = false;
-                animator.Play("Idle");
-                rigidBody.velocity = Vector2.zero;
-                lineRenderer.enabled = true;
-                lineRenderer.SetPositions(new Vector3[]{ laserOrigin.transform.position, mouseWorld });
-            }
+            ShineLaser();
         }
 
         // Disable laser when mouse button isn't pressed
@@ -162,8 +155,8 @@ public class Mechanics : MonoBehaviour
 
     public bool IsGrounded()
     {
-		if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value) ||
-			Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, crates.value))
+        if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value) ||
+        Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, crates.value))
         {
             animator.SetBool("jump", false);
             animator.SetBool("falling", false);
@@ -174,11 +167,23 @@ public class Mechanics : MonoBehaviour
         {
             if (rigidBody.velocity.y < -1)
             {
-				Debug.Log (rigidBody.velocity.y);
-				animator.SetBool("falling", true);
+                Debug.Log(rigidBody.velocity.y);
+                animator.SetBool("falling", true);
             }
             animator.SetBool("grounded", false);
             return false;
+        }
+    }
+
+    private void ShineLaser()
+    {
+        if (isShiningLaser)
+        {
+            canMove = false;
+            animator.Play("Idle");
+            rigidBody.velocity = Vector2.zero;
+            lineRenderer.enabled = true;
+            lineRenderer.SetPositions(new Vector3[]{ laserOrigin.transform.position, mouseWorld });
         }
     }
 
