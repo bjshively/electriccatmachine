@@ -133,13 +133,8 @@ public class Mechanics : MonoBehaviour
                 }
 
             }
-            Debug.Log(currentSpeed);
 
-//            if  
-
-//            float currentSpeed = horizontal * maxSpeed;
             animator.SetFloat("speed", Mathf.Abs(currentSpeed));
-            rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
 
             if (canJump && Input.GetKeyDown(KeyCode.W))
             {
