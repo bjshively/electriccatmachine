@@ -21,6 +21,9 @@ public class Mechanics : MonoBehaviour
     private GameObject babyNinja;
     private GameObject laserOrigin;
     private float maxSpeed = 10f;
+    private float targetSpeed;
+    private float currentSpeed;
+    private float accelerationRate = .1f;
     private float jumpForce = 14f;
 
 
@@ -90,7 +93,51 @@ public class Mechanics : MonoBehaviour
 
         if (canMove)
         {
-            float currentSpeed = horizontal * maxSpeed;
+            
+            // Specify target speed for acceleration
+            if (horizontal > 0)
+            {
+                targetSpeed = maxSpeed;
+                if (rigidBody.velocity.x < targetSpeed)
+                {
+                    currentSpeed = rigidBody.velocity.x + accelerationRate;
+                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
+                }
+            }
+            else if (horizontal < 0)
+            {
+                targetSpeed = -maxSpeed;
+                if (rigidBody.velocity.x > targetSpeed)
+                {
+                    currentSpeed = rigidBody.velocity.x - accelerationRate;
+                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
+                }
+            }
+            else
+            {
+                if ((rigidBody.velocity.x < .2) && rigidBody.velocity.x > -.2)
+                {
+                    currentSpeed = 0;
+                    rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+                }
+                targetSpeed = 0;
+                if (rigidBody.velocity.x > targetSpeed)
+                {
+                    currentSpeed = rigidBody.velocity.x - accelerationRate * 2;
+                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
+                }
+                else if (rigidBody.velocity.x < targetSpeed)
+                {
+                    currentSpeed = rigidBody.velocity.x + accelerationRate * 2;
+                    rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
+                }
+
+            }
+            Debug.Log(currentSpeed);
+
+//            if  
+
+//            float currentSpeed = horizontal * maxSpeed;
             animator.SetFloat("speed", Mathf.Abs(currentSpeed));
             rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
 
@@ -156,7 +203,7 @@ public class Mechanics : MonoBehaviour
     public bool IsGrounded()
     {
         if (Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, ground.value) ||
-        Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, crates.value))
+            Physics2D.Raycast(transform.FindChild("groundPoint").position, Vector2.down, 0.4f, crates.value))
         {
             animator.SetBool("jump", false);
             animator.SetBool("falling", false);
@@ -167,7 +214,6 @@ public class Mechanics : MonoBehaviour
         {
             if (rigidBody.velocity.y < -1)
             {
-                Debug.Log(rigidBody.velocity.y);
                 animator.SetBool("falling", true);
             }
             animator.SetBool("grounded", false);
