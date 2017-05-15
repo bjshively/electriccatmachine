@@ -75,6 +75,7 @@ public abstract class Cat : MonoBehaviour
             else
             {
                 animator.SetBool("falling", false);
+                animator.SetBool("jumping", true);
             }
             return false;
         }
