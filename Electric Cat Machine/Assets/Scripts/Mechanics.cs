@@ -102,6 +102,10 @@ public class Mechanics : MonoBehaviour
                 if (rigidBody.velocity.x < targetSpeed)
                 {
                     currentSpeed = rigidBody.velocity.x + accelerationRate;
+                    if (currentSpeed > maxSpeed)
+                    {
+                        currentSpeed = maxSpeed;
+                    }
                     rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
                 }
             }
@@ -111,6 +115,10 @@ public class Mechanics : MonoBehaviour
                 if (rigidBody.velocity.x > targetSpeed)
                 {
                     currentSpeed = rigidBody.velocity.x - accelerationRate;
+                    if (currentSpeed < -maxSpeed)
+                    {
+                        currentSpeed = -maxSpeed;
+                    }
                     rigidBody.velocity = new Vector2(currentSpeed, rigidBody.velocity.y);
                 }
             }
