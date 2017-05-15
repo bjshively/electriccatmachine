@@ -7,6 +7,7 @@ public abstract class Cat : MonoBehaviour
 
     protected Vector3 mouseWorld;
     protected Rigidbody2D rigidBody;
+    protected Animator animator;
     public LayerMask ground;
     protected Mechanics playerAttributes;
 
@@ -20,6 +21,8 @@ public abstract class Cat : MonoBehaviour
         playerAttributes = GameObject.FindGameObjectWithTag("Player").GetComponent<Mechanics>();
         alive = true;
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        animator.SetBool("jump", true);
         Flip();
     }
 
@@ -57,10 +60,22 @@ public abstract class Cat : MonoBehaviour
     {
         if (Physics2D.Raycast(this.transform.position, Vector2.down, 1f, ground.value))
         {
+            animator.SetBool("falling", false);
+            animator.SetBool("jump", false);
+            animator.SetBool("grounded", true);
             return true;
         }
         else
         {
+            animator.SetBool("grounded", false);
+            if (rigidBody.velocity.y < 0)
+            {
+                animator.SetBool("falling", true);
+            }
+            else
+            {
+                animator.SetBool("falling", false);
+            }
             return false;
         }
     }
