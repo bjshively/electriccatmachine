@@ -257,11 +257,11 @@ public class Mechanics : MonoBehaviour
             Vector2 throwForce;
             if (facingRight)
             {
-                throwForce = new Vector2(rigidBody.velocity.x + 200, 200);
+                throwForce = new Vector2(rigidBody.velocity.x + 100, 300);
             }
             else
             {
-                throwForce = new Vector2(rigidBody.velocity.x + -200, 200);
+                throwForce = new Vector2(rigidBody.velocity.x + -100, 300);
             }
 
             babyNinja.GetComponent <Rigidbody2D>().AddForce(throwForce);

@@ -15,7 +15,7 @@ public class RunningCat : Cat
     {
         if (IsGrounded())
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x * 1.2f, rigidBody.velocity.y);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x * 1.1f, rigidBody.velocity.y);
         }
     }
 
