@@ -23,7 +23,7 @@ public class Mechanics : MonoBehaviour
     private float maxSpeed = 10f;
     private float targetSpeed;
     private float currentSpeed;
-    private float accelerationRate = .1f;
+    private float accelerationRate = .3f;
     private float deccelerationRate = .2f;
     private float jumpForce = 14f;
 
@@ -171,7 +171,7 @@ public class Mechanics : MonoBehaviour
     {
         if (canMove)
         {
-            if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+            if (rigidBody.velocity.x > 0 && !facingRight || rigidBody.velocity.x < 0 && facingRight)
             {
                 facingRight = !facingRight;
 
