@@ -151,13 +151,13 @@ public class Mechanics : MonoBehaviour
         // Throw a regular cat
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ThrowCat("RunningCat");
+            ThrowCat("GrayCatRun");
         }
 
         // Shine laser. Throw a laser pointer chasing cat
         if (Input.GetMouseButtonDown(0) && !isShiningLaser && grounded)
         {
-            ThrowCat("LaserFollowingCat");
+            ThrowCat("GrayCatLaser");
         }
 
         // While button is held, shine laser
